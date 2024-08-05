@@ -9,7 +9,7 @@ const yearMapping = {
     4: 'IVth Year'
 };
 
-function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, numSemesters }) {
+function Transcript({ selectedCourses, courseGrades, gpa, cgpa, numSemesters }) {
     const downloadContainerRef = useRef(null);
     const [loading, setLoading] = useState(false);
 
