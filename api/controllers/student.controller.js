@@ -12,7 +12,7 @@ export const getStudents = async (req, res, next) => {
         }
 
         const batchData = departmentData.batches.find(b => b.batch_year === batch);
-
+z
         if (!batchData) {
             return res.status(404).json({ message: "Batch not found" });
         }

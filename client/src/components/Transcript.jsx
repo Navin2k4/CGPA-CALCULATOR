@@ -17,10 +17,7 @@ function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, num
         setLoading(true);
 
         const element = downloadContainerRef.current;
-        const studentName = studentInfo.name.replace(/\s+/g, '');
-        const rollNumber = studentInfo.rollNumber.replace(/\s+/g, '');
-
-        const fileName = `${studentName}_${rollNumber}_CGPA.pdf`;
+        const fileName = `CGPA.pdf`;
 
         const opt = {
             margin: [0.3, 0.6],
@@ -51,46 +48,7 @@ function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, num
         </div>
     );
 
-    const renderStudentDetails = () => (
-        <div className="">
-            <h2 className="text-[22px] font-semibold tracking-wider text-center mb-6">STUDENT DETAILS</h2>
-            <div className="mb-6">
-                <table className="mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-                    <tbody>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Student Name</td>
-                            <td className="py-3 px-6">{studentInfo.name}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Roll Number</td>
-                            <td className="py-3 px-6">{studentInfo.rollNumber}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Register Number</td>
-                            <td className="py-3 px-6">{studentInfo.registerNumber}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Department</td>
-                            <td className="py-3 px-6">{studentInfo.department}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Batch</td>
-                            <td className="py-3 px-6">{studentInfo.batch}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Year / Section</td>
-                            <td className="py-3 px-6">{yearMapping[studentInfo.year]} / {studentInfo.section}</td>
-                        </tr>
-                        <tr>
-                            <td className="font-semibold py-3 px-6 bg-gray-100 text-gray-600">Number of Semesters Attended</td>
-                            <td className="py-3 px-6">{numSemesters}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-
+    
     const renderSemesterGPA = () => (
         <div className="max-w-xl mx-auto my-4">
             <div className="bg-white shadow-lg rounded-lg overflow-hidden p-4">
@@ -177,7 +135,9 @@ function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, num
     const renderDownloadBtn = () => {
         return (
             <div className="text-center mt-8">
-                <button onClick={handleDownloadPDF} className="mb-8 py-3 px-6 bg-blue-300 font-semibold rounded-lg ">
+                <button onClick={handleDownloadPDF}
+                disabled={loading}
+                className="mb-8 py-3 px-6 bg-blue-300 font-semibold rounded-lg ">
                     <div className='flex items-center justify-center gap-3'>
                         {loading ? (
                             <div className="flex items-center justify-center gap-2">
@@ -210,7 +170,6 @@ function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, num
             }</style>
             <div id='transcript-container' className="max-w-4xl pt-5 mx-auto font-sans text-base leading-normal">
                 <div className="container mx-auto">
-                    {renderStudentDetails()}
                     {renderSemesterGPA()}
                     {renderSemesterDetails()}
                 </div>
@@ -219,7 +178,6 @@ function Transcript({ studentInfo, selectedCourses, courseGrades, gpa, cgpa, num
                 <div ref={downloadContainerRef}>
                     <div className="first-page">
                         {renderCollegeInfo()}
-                        {renderStudentDetails()}
                         {renderSemesterGPA()}
                     </div>
                     {renderSemesterDetails()}

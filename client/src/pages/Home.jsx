@@ -26,6 +26,7 @@ const Home = () => {
         section: ''
     });
     const [students, setStudents] = useState([]);
+    console.log(students);
     const [showAlert, setShowAlert] = useState(false);
     const departments = useFetchDepartments();
     const navigate = useNavigate();
